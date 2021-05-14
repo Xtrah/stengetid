@@ -1,15 +1,15 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <img alt="Vue logo" style="width:200px" src="https://www.vinmonopolet.no/medias/sys_master/cms-images/cms-images/h95/h26/9530561232926/polrose.jpg">
+  <polet/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import polet from './components/polet.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    polet
   }
 }
 </script>
