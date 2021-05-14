@@ -1,7 +1,8 @@
 <template>
   <div class="hello">
-    <h1>{{ closingTime }}</h1>
-    <h2>{{ timeLeft }}</h2>
+    <h1>Stengetid</h1>
+    <h2>{{ closingTime }}</h2>
+    <p>{{ timeLeft }}</p>
     <p></p>
   </div>
 </template>
@@ -26,9 +27,23 @@ export default {
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);
     }
-    
+
     this.closingTime = data[0].openingHours.regularHours[dayOfTheWeek].closingTime
     
+    var dayjs = require('dayjs')
+    require('dayjs/locale/nb')
+    // import dayjs from 'dayjs' // ES 2015
+    dayjs().format()
+    dayjs.locale('nb') // use locale globally
+    var customParseFormat = require('dayjs/plugin/customParseFormat')
+    dayjs.extend(customParseFormat)
+    var relativeTime = require('dayjs/plugin/relativeTime')
+    // import relativeTime from 'dayjs/plugin/relativeTime' // ES 2015
+    dayjs.extend(relativeTime)
+
+    let closingTime = dayjs(this.closingTime, "HH:mm")
+
+    this.timeLeft = dayjs().to(closingTime)
     
   },
 };
