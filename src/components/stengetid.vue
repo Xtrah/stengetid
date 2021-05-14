@@ -19,7 +19,8 @@ export default {
   async created() {
     const now = new Date()
     const dayOfTheWeek = now.getDay()-1
-    const headers = {"Ocp-Apim-Subscription-Key": process.env.VUE_APP_apikey};
+    const VUE_APP_apikey = process.env.VUE_APP_apikey
+    const headers = {"Ocp-Apim-Subscription-Key": VUE_APP_apikey};
     const response = await fetch("https://apis.vinmonopolet.no/stores/v0/details?storeID=160", { headers })
     const data = await response.json();
     
