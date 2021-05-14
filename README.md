@@ -1,4 +1,4 @@
-# polet
+# Stengetid
 
 ## Project setup
 ```

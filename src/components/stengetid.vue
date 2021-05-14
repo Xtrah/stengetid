@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "polet",
+  name: "stengetid",
   data() {
     return {
       timeLeft: null,
