@@ -1,6 +1,5 @@
 <template>
   <img alt="polrose" style="width:200px" src="./assets/logo.jpg">
-  <h1>Stengetid</h1>
   <stengetid/>
 </template>
 
