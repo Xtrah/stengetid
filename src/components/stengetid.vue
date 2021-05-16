@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-    <h1>Stengetid</h1>
     <h2>{{ closingTime }}</h2>
     <p>{{ timeLeft }}</p>
     <p></p>
