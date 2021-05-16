@@ -28,7 +28,7 @@ export default {
 
     // Find current time and day
     const now = new Date()
-    var todayDate = now.toISOString().slice(0, 10); // YYYY-MM-DD
+    var todayDate = now.toLocaleDateString('en-CA'); // YYYY-MM-DD
     var currentDay = now.getDay()-1
     if (currentDay == -1) { 
       currentDay = 6 // API Sunday
