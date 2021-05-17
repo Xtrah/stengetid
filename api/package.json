@@ -1,13 +1,17 @@
 {
-  "name": "api",
-  "version": "1.0.0",
-  "description": "",
+  "name": "stengetid-api",
+  "version": "0.1.0",
+  "description": "API for app to return Vinmonopolet closing time",
+  "repository": "github:Xtrah/stengetid",
+  "homepage": "https://github.com/Xtrah/stengetid",
+  "bugs": "https://github.com/Xtrah/stengetid/issues",
   "scripts": {
     "start": "func start",
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "dayjs": "^1.10.4"
   },
   "devDependencies": {}
 }

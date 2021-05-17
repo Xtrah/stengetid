@@ -1,6 +1,10 @@
 {
   "name": "stengetid",
   "version": "0.1.0",
+  "description": "App to return Vinmonopolet closing time",
+  "repository": "github:Xtrah/stengetid",
+  "homepage": "https://github.com/Xtrah/stengetid",
+  "bugs": "https://github.com/Xtrah/stengetid/issues",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -9,7 +13,6 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "dayjs": "^1.10.4",
     "vue": "^3.0.0"
   },
   "devDependencies": {
@@ -39,5 +42,10 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "engines": {
+    "node": ">14.0.0",
+    "npm": "6.14.13",
+    "yarn": "1.22.10"
+  }
 }
