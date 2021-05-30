@@ -12,28 +12,13 @@ module.exports = async function (context, req) {
     } else {
         data = ("HTTP-Error: " + response.status);
     }
-    
-    // Find current Norwegian time and date
-
-    function changeTimezone(date, ianatz) { // https://stackoverflow.com/a/53652131
-        var invdate = new Date(date.toLocaleString('en-US', {
-          timeZone: ianatz
-        }));
-        var diff = date.getTime() - invdate.getTime();
-        return new Date(date.getTime() - diff);
-      }
-    
-    const utctime = new Date()
-    let now = changeTimezone(utctime, "Europe/Oslo")
-    
+    // Find current time and day
+    const now = new Date()
     var todayDate = now.toLocaleDateString('en-CA'); // YYYY-MM-DD
     var currentDay = now.getDay() - 1
     if (currentDay == -1) {
         currentDay = 6 // API Sunday
     }
-
-    var closingTime = null;
-    var timeLeft = null;
 
     // Use Day.js to calculate time differences
     var dayjs = require('dayjs')
@@ -49,28 +34,28 @@ module.exports = async function (context, req) {
 
     // Return relevant info
     if (data.openingHours.regularHours[currentDay].closed == true) {
-        closingTime = "Stengt i dag"
+        this.closingTime = "Stengt i dag"
         // TODO: Next opening hour
     } else {
-        closingTime = data.openingHours.regularHours[currentDay].closingTime
-        let closingTime = dayjs(closingTime, "HH:mm")
-        timeLeft = dayjs().to(dayjs(now), closingTime)
+        this.closingTime = data.openingHours.regularHours[currentDay].closingTime
+        let closingTime = dayjs(this.closingTime, "HH:mm")
+        this.timeLeft = dayjs().to(closingTime)
     }
 
     for (let i = 0; i < data.openingHours.exceptionHours.length; i++) {
         if (data.openingHours.exceptionHours[i].date == todayDate) {
             if (data.openingHours.exceptionHours[i].message != "") {
-                closingTime = data.openingHours.exceptionHours[i].message
+                this.closingTime = data.openingHours.exceptionHours[i].message
             }
             else {
-                closingTime = data.openingHours.exceptionHours[i].closingTime
-                let closingTime = dayjs(closingTime, "HH:mm")
-                timeLeft = dayjs().to(dayjs(now), closingTime)
+                this.closingTime = data.openingHours.exceptionHours[i].closingTime
+                let closingTime = dayjs(this.closingTime, "HH:mm")
+                this.timeLeft = dayjs().to(closingTime)
             }
         }
     }
 
     context.res.json({
-        text: [closingTime, timeLeft]
+        text: [this.closingTime, this.timeLeft]
     });
 };
