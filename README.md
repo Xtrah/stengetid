@@ -6,7 +6,7 @@ Simple [Azure Static Web App](https://docs.microsoft.com/en-us/azure/static-web-
 
 ### Frontend only
 
-1. Install dependencies: `yarn install`
+1. Install dependencies: `yarn`
 2. Compile and hot-reload: `yarn serve`
 3. Compile and minify for production: `yarn build`
 4. Lint and fix files: `yarn lint`

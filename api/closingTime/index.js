@@ -3,8 +3,7 @@ module.exports = async function (context, req) {
 
     // Backend API call to Vinmonopolet
     const fetch = require("node-fetch");
-    const VUE_APP_apikey = process.env.VUE_APP_apikey
-    const headers = { "Ocp-Apim-Subscription-Key": VUE_APP_apikey };
+    const headers = { "Ocp-Apim-Subscription-Key": process.env.VUE_APP_apikey };
     const response = await fetch("https://apis.vinmonopolet.no/stores/v0/details?storeID=160", { headers })
     if (response.ok) {
         var data = await response.json();
@@ -20,17 +19,26 @@ module.exports = async function (context, req) {
         currentDay = 6 // API Sunday
     }
 
-    // Use Day.js to calculate time differences
+    // Use Day.js to calculate time differences https://day.js.org/
     var dayjs = require('dayjs')
-    require('dayjs/locale/nb')
+    require('dayjs/locale/nb')  // for Norwegian language relative time message
     // import dayjs from 'dayjs' // ES 2015
     dayjs().format()
-    dayjs.locale('nb') // use locale globally
+    dayjs.locale('nb') // use locale globally from this point
+    
+    // Enable plugin to parse 24h time strings HH:mm
     var customParseFormat = require('dayjs/plugin/customParseFormat')
     dayjs.extend(customParseFormat)
-    var relativeTime = require('dayjs/plugin/relativeTime')
+    var relativeTime = require('dayjs/plugin/relativeTime') // automatic relative time left/since closing time
     // import relativeTime from 'dayjs/plugin/relativeTime' // ES 2015
     dayjs.extend(relativeTime)
+
+    // Enable plugin to support Norwegian timezone as Azure Functions is UTC by default
+    var utc = require('dayjs/plugin/utc')
+    var timezone = require('dayjs/plugin/timezone') // dependent on utc plugin
+    dayjs.extend(utc)
+    dayjs.extend(timezone)
+    dayjs.tz.setDefault("Europe/Oslo")
 
     // Return relevant info
     if (data.openingHours.regularHours[currentDay].closed == true) {
@@ -38,7 +46,7 @@ module.exports = async function (context, req) {
         // TODO: Next opening hour
     } else {
         this.closingTime = data.openingHours.regularHours[currentDay].closingTime
-        let closingTime = dayjs(this.closingTime, "HH:mm")
+        let closingTime = dayjs.tz(this.closingTime, "HH:mm", "Europe/Oslo")
         this.timeLeft = dayjs().to(closingTime)
     }
 
@@ -49,7 +57,7 @@ module.exports = async function (context, req) {
             }
             else {
                 this.closingTime = data.openingHours.exceptionHours[i].closingTime
-                let closingTime = dayjs(this.closingTime, "HH:mm")
+                let closingTime = dayjs.tz(this.closingTime, "HH:mm", "Europe/Oslo")
                 this.timeLeft = dayjs().to(closingTime)
             }
         }
