@@ -11,6 +11,7 @@ module.exports = async function (context, req) {
     } else {
         data = ("HTTP-Error: " + response.status);
     }
+    
     // Find current time and day
     const now = new Date()
     var todayDate = now.toLocaleDateString('en-CA'); // YYYY-MM-DD
@@ -38,24 +39,24 @@ module.exports = async function (context, req) {
     var timezone = require('dayjs/plugin/timezone') // dependent on utc plugin
     dayjs.extend(utc)
     dayjs.extend(timezone)
-    dayjs.tz.setDefault("Europe/Oslo")
 
-    // Return relevant info
-    if (data.openingHours.regularHours[currentDay].closed == true) {
+    // Find relevant data
+    if (data.openingHours.regularHours[currentDay].closed == true) { // If closed whole day
         this.closingTime = "Stengt i dag"
         // TODO: Next opening hour
-    } else {
-        this.closingTime = data.openingHours.regularHours[currentDay].closingTime
+    } 
+    else { // Not closed, calculate time to/from closing hour
+        this.closingTime = data.openingHours.regularHours[currentDay].closingTime 
         let closingTime = dayjs.tz(this.closingTime, "HH:mm", "Europe/Oslo")
         this.timeLeft = dayjs().to(closingTime)
     }
 
-    for (let i = 0; i < data.openingHours.exceptionHours.length; i++) {
-        if (data.openingHours.exceptionHours[i].date == todayDate) {
-            if (data.openingHours.exceptionHours[i].message != "") {
+    for (let i = 0; i < data.openingHours.exceptionHours.length; i++) { // Check for exception day
+        if (data.openingHours.exceptionHours[i].date == todayDate) { // If exception day today
+            if (data.openingHours.exceptionHours[i].message != "") { // with non-empty message
                 this.closingTime = data.openingHours.exceptionHours[i].message
             }
-            else {
+            else { // with empty message
                 this.closingTime = data.openingHours.exceptionHours[i].closingTime
                 let closingTime = dayjs.tz(this.closingTime, "HH:mm", "Europe/Oslo")
                 this.timeLeft = dayjs().to(closingTime)
@@ -63,6 +64,7 @@ module.exports = async function (context, req) {
         }
     }
 
+    // Return relevant data
     context.res.json({
         text: [this.closingTime, this.timeLeft]
     });
