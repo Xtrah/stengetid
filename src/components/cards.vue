@@ -1,53 +1,55 @@
-<!-- TODO -->
-
 <template>
-    <div class="container">
-        <!--  Repeat this as many times as you need to -->
-        <section class="card" v-for="n in 3" v-bind:key="n">
-            <figure>
-                <img src="../assets/testMap.jpg" alt="Map">
-            </figure>
-            <div class="text-container">
-                <h3>{{ cardTitle }}</h3>
-                <p>{{ cardContent }}</p>
-                <button>{{ cardButton }}</button>
-            </div>
-        </section>
-    </div>
+    <section class="card">
+        <figure>
+            <img :src="resolve_img_url(img_src)" alt="Map">
+        </figure>
+        <div class="text-container">
+            <h3>{{ cardTitle }}</h3>
+            <p>{{ cardContent }}</p>
+            <button>{{ cardButton }}</button>
+        </div>
+    </section>
+
 </template>
 
 
 <script>
 export default {
-  name: "cards",
-  data() {
-    return {
-      cardImg: "./assets/testMap.jpg", // Map can be generated via entur or mapbox
-      cardTitle: "Rekker jeg det?",
-      cardContent: "Vil du vite om du rekker å dra til vinmonopolet før det stenger?",
-      cardButton: "Button"
-    };
-  }
+    name: "indexCard",
+
+    props: {
+        img_src: {
+            type: String,
+            required: false,
+            default: './assets/testMap.jpg',
+            },
+        cardTitle: {
+            type: String,
+            default: 'Lorem Ipsum',
+        },
+        cardContent: {
+            type: String,
+            default: 'Lorem ipsum sit dolaro',
+        },
+        cardButton: {
+            type: String,
+            default: 'Lorem'
+        },
+    },
+
+    // Fix for build-time images not loading while using props (might work later on, but should probably get a full url rather than a relative one.)
+    methods: {
+        resolve_img_url: function (path) {
+            let images = require.context('../assets/', false, /\.png$|\.jpg$/)
+            return images("./"+path)
+        }
+    }
+
 };
 </script>
 
 
 <style scoped>
-.container {
-    /* Container Design */
-    max-width:920px;
-    padding:10px;
-    margin: 10em auto 0 auto;
-
-    /* inner area */
-    text-align: left;
-
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap:2em;
-}
-
-
 
 section.card {
     flex-grow: 2;

@@ -2,21 +2,33 @@
   <!--<img alt="polrose" style="width:200px" src="./assets/logo.jpg">-->
   <h1>Stenge<span class="thin">Tid</span></h1>
   <stengetid/>
-  <cards/>
+  
+  <!-- Props can be added or changed easily, remmove the v-for if not needed-->
+  <div class="card_container">
+    <card 
+      v-for="n in 3" v-bind:key="n"
+
+      img_src="testMap.jpg"
+      cardTitle="Rekker jeg det?"
+      cardContent="Vil du vite om du rekker å dra til vinmonopolet før det stenger?"
+      cardButton="Button"></card>
+  </div>
 </template>
 
 <script>
-import cards from './components/cards.vue'
+import card from './components/cards.vue'
 import stengetid from './components/stengetid.vue'
 
 export default {
   name: 'App',
   components: {
     stengetid,
-    cards
+    card
   }
 }
 </script>
+
+
 
 <style>
 
@@ -46,5 +58,20 @@ h1 {
   font-size:6.4em;
 }
 h1 span.thin{font-weight:300}
+
+
+.card_container {
+    /* Container Design */
+    max-width:920px;
+    padding:10px;
+    margin: 10em auto 0 auto;
+
+    /* inner area */
+    text-align: left;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap:2em;
+}
 
 </style>
