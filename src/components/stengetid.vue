@@ -1,7 +1,7 @@
 <template>
   <div class="closingTime">
     <p>Vinmonopolet stenger:</p>
-    <h2>{{ closingTime || "Please wait..." }}</h2>
+    <h2>{{ closingTime || "Vent litt..." }}</h2>
     <p>{{ timeLeft || "Henter åpningstider..."}}</p>
   </div>
 </template>
@@ -48,24 +48,5 @@ export default {
 }
 
 
-
-/** Not used! */
-
-/*
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-*/
 
 </style>
