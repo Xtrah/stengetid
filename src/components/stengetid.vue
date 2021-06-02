@@ -1,8 +1,8 @@
 <template>
   <div class="closingTime">
     <p>Vinmonopolet stenger:</p>
-    <h2>{{ closingTime }}</h2>
-    <p>{{ timeLeft }}</p>
+    <h2>{{ closingTime || "Please wait..." }}</h2>
+    <p>{{ timeLeft || "Henter åpningstider..."}}</p>
   </div>
 </template>
 
@@ -44,6 +44,7 @@ export default {
   margin-bottom:1rem;
   line-height: 30px;
   letter-spacing: 0em;
+  font-weight:300;
 }
 
 
