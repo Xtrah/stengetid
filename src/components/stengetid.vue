@@ -1,6 +1,7 @@
 <template>
-  <div class="hello">
-    <h1>{{ closingTime }}</h1>
+  <div class="closingTime">
+    <p>I dag stenger vinmonopolet kl:</p>
+    <h2>{{ closingTime }}</h2>
     <p>{{ timeLeft }}</p>
   </div>
 </template>
@@ -24,6 +25,19 @@ export default {
 </script>
 
 <style scoped>
+.closingTime {
+  font-weight: 600;
+}
+
+.closingTime h2 {
+  color:rgba(106, 235, 157, 1);
+  font-size:6.4em;
+}
+
+.closingTime p {font-size:2.4em;}
+
+
+
 h3 {
   margin: 40px 0 0;
 }
