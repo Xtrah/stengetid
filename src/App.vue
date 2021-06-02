@@ -11,7 +11,7 @@
       img_src="testMap.jpg"
       cardTitle="Rekker jeg det?"
       cardContent="Vil du vite om du rekker å dra til Vinmonopolet før det stenger? Da kan du klikke her!"
-      cardButton="Button"></card>
+      cardButton="CAN I MAKE IT?"></card>
   </div>
 </template>
 
