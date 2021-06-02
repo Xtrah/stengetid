@@ -1,6 +1,6 @@
 <template>
   <!--<img alt="polrose" style="width:200px" src="./assets/logo.jpg">-->
-  <h1>Stenge<span class="thin">Tid</span></h1>
+  <h1>Stenge<span class="thin">tid</span></h1>
   <stengetid/>
   
   <!-- Props can be added or changed easily, remmove the v-for if not needed-->
