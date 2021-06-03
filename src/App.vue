@@ -3,14 +3,14 @@
     <h1 class="text-center font-serif font-semibold text-8xl">Stenge<span class="font-light">tid</span></h1>
     <stengetid/>
 
-    <!-- Props can be added or changed easily, remmove the v-for if not needed-->
-    <div class="card_container flex justify-evenly gap-10 mt-20">
+    <!-- Props can be added or changed easily, remove the v-for if not needed-->
+    <div class="max-w-screen-md mx-auto px-5 md:px-10 md:flex justify-evenly gap-10 mt-20">
       <card
-          v-for="n in 3" v-bind:key="n"
+          v-for="n in 2" v-bind:key="n"
 
           img_src="testMap.jpg"
           cardTitle="Rekker jeg det?"
-          cardContent="Vil du vite om du rekker å dra til vinmonopolet før det stenger?"
+          cardContent="Vil du vite om du rekker å dra til Vinmonopolet før det stenger?"
           cardButton="Button"></card>
     </div>
   </div>
@@ -30,18 +30,7 @@ export default {
 </script>
 
 
-
 <style>
-
-html {
-  background-color:#1C1C1E;
-  background:#1C1C1E;
-  color:#E8EAED;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#app {
-}
-
+/* HTML style in index.css */
+#app {}
 </style>

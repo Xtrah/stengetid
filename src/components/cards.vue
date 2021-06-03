@@ -1,12 +1,12 @@
 <template>
-    <section class="rounded-xl bg-gray">
+    <section class="rounded-xl bg-gray shadow-lg">
         <figure class="rounded-t-xl">
             <img :src="resolve_img_url(img_src)" alt="Map" class="rounded-t-xl w-full">
         </figure>
         <div class="text-container px-6 py-5">
             <h3 class="text-2xl font-serif font-bold">{{ cardTitle }}</h3>
             <p>{{ cardContent }}</p>
-            <button class="text-xl bg-black py-3 px-4 mt-6 rounded-xl">{{ cardButton }}</button>
+            <button class="text-xl bg-gray-light hover:bg-black py-3 px-4 mt-6 rounded-xl text-green">{{ cardButton }}</button>
         </div>
     </section>
 
