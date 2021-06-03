@@ -1,0 +1,5 @@
+/* Adding Tailwindcss to project */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
