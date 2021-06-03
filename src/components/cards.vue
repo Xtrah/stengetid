@@ -22,7 +22,7 @@ export default {
             type: String,
             required: false,
             default: './assets/testMap.jpg',
-            },
+        },
         cardTitle: {
             type: String,
             default: 'Lorem Ipsum',

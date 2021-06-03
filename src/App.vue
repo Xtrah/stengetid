@@ -31,6 +31,11 @@ export default {
 
 
 <style>
-/* HTML style in index.css */
+/*  HTML style in index.css
+    Custom styles should be placed in index.css
+
+    Only specific overides should be added to this file.
+    Otherwise, use styles available in https://tailwindcss.com/docs
+ */
 #app {}
 </style>

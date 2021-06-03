@@ -1,13 +1,20 @@
 <template>
   <div class="closingTime mt-14 text-center">
-    <p class="text-2xl">Vinmonopolet stenger:</p>
+    <p class="text-2xl" v-if="closingTime">Vinmonopolet stenger:</p>
     <h2 class="text-green mt-4 text-7xl font-semibold font-serif">
-      <span class="text-5xl" v-if="closingTime === null">
-        <Spinner size="small" inline />Henter Åpningstider
+
+      <!-- This span will only be shown if timeLeft is null -->
+      <span class="text-5xl" v-if="!closingTime">
+        <Spinner size="small" inline />
       </span>
       {{ closingTime }}
     </h2>
-    <p class="text-2xl">{{ timeLeft || "Vent litt..."}}</p>
+    <p class="text-2xl">
+
+      <!-- This span will only be shown if timeLeft is null -->
+      <span class="block mb-32" v-if="!timeLeft">Sjekker Vinmonopolets åpningstider, Vent litt...</span>
+      {{ timeLeft}}
+    </p>
   </div>
 </template>
 

@@ -1,4 +1,5 @@
 <template>
+  <!-- Dynamic classes based on selected -->
   <svg :class="[inline ? 'inline' : '', spinnerSize, 'animate-spin mb-2 mr-2']"
        aria-hidden="true"
        focusable="false"
