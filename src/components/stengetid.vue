@@ -1,14 +1,29 @@
 <template>
-  <div class="closingTime">
-    <p>Vinmonopolet stenger:</p>
-    <h2>{{ closingTime || "Vent litt..." }}</h2>
-    <p>{{ timeLeft || "Henter åpningstider..."}}</p>
+  <div class="closingTime mt-14 text-center">
+    <p class="text-2xl" v-if="closingTime">Vinmonopolet stenger:</p>
+    <h2 class="text-green mt-4 text-7xl font-semibold font-serif">
+
+      <!-- This span will only be shown if timeLeft is null -->
+      <span class="text-5xl" v-if="!closingTime">
+        <Spinner size="small" inline />
+      </span>
+      {{ closingTime }}
+    </h2>
+    <p class="text-2xl">
+
+      <!-- This span will only be shown if timeLeft is null -->
+      <span class="block mb-32" v-if="!timeLeft">Sjekker Vinmonopolets åpningstider, Vent litt...</span>
+      {{ timeLeft}}
+    </p>
   </div>
 </template>
 
 <script>
+import Spinner from "@/components/spinner";
+
 export default {
   name: "stengetid",
+  components: {Spinner},
   data() {
     return {
       closingTime: null,
@@ -25,28 +40,4 @@ export default {
 </script>
 
 <style scoped>
-.closingTime {
-  font-weight: 600;
-  margin-top:10em;
-}
-
-
-.closingTime h2 {
-  color:rgba(106, 235, 157, 1);
-  font-size:6.4em;
-  margin:0;
-  padding:0;
-}
-
-.closingTime p {
-  font-size:2.6em;
-  margin-top:0;
-  margin-bottom:1rem;
-  line-height: 30px;
-  letter-spacing: 0em;
-  font-weight:300;
-}
-
-
-
 </style>
